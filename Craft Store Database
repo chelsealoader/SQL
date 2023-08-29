@@ -1,0 +1,31 @@
+CREATE TABLE Crafts_For_Less (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, on_hand TEXT, items_sold INTEGER);
+
+INSERT INTO Crafts_For_Less Values
+(1, "100% Cotton Yarn", 3.99, 34, 23),
+(2, "3 Pack Canvases", 8.89, 10, 3),
+(3, "Paintbrushes", 13.99, 42, 202),
+(4, "Value Pack Sketchbooks", 20, 13, 8),
+(5, "Alcohol Markers", 34.99, 4, 15),
+(6, "Value Craft Paint", .99, 145, 504),
+(7, "10 Pack Crochet Hooks", 10.76, 11, 13),
+(8, "Scrapbook", 13, 6, 3),
+(9, "Bracelete Making Kit", 23.89, 4, 24),
+(10, "Embroidery Thread", .50, 667, 1203),
+(11, "Sewing Machine", 209.99, 1, 7),
+(12, "Plain White Tee-Shirt", 3.99, 40, 98),
+(13, "Tee-Shirt Dye", 2.89, 19, 46),
+(14, "Decorative Beads", 2, 53, 51),
+(15, "Faux Flowers", 3.99, 0, 199);
+
+--Display the database by price.
+Select * From Crafts_For_Less 
+ORDER BY price desc;
+
+--Display the most popular items.
+Select item, items_sold From Crafts_For_Less 
+ORDER BY items_sold desc 
+limit 5;
+
+--Display items that need to be restocked.
+Select item, on_hand FROM Crafts_For_Less 
+Where on_hand = 0
