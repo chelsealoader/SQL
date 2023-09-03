@@ -1,0 +1,48 @@
+/* Create a table about Famous People and how they relate to eachother */
+
+CREATE TABLE "Artists_Info" (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, genre TEXT, albums INTEGER, songs INTEGER, startup_year INTEGER);
+
+INSERT INTO "Artists_Info" VALUES 
+(1, "Daniel Caesar", 28, "R&B/Soul", 3, 164, 2013),
+(2, "SZA", 33, "R&B/Soul", 2, 366, 2012),
+(3, "Kali Uchis", 29, "R&B/Soul", 4, 228, 2012),
+(4, "PinkPantheress", 22, "Drum and Bass", 1, 149, 2019),
+(5, "H.E.R.", 26, "R&B/Soul", 3, 197, 2011),
+(6, "Ari Lennox", 32, "R&B/Soul", 2, 231, 2013),
+(7, "Steve Lacy", 25, "Alternative/Indie", 3, 192, 2017);
+
+CREATE TABLE "Collaboration" (id INTEGER PRIMARY KEY, artist_1 INTEGER, artist_2 INTEGER);
+
+INSERT INTO "Collaboration" VALUES
+(1, 1, 3),
+(2, 1, 5),
+(3, 2, 3),
+(4, 3, 1),
+(5, 3, 2),
+(6, 3, 7),
+(7, 5, 1),
+(8, 7, 3);
+
+--Display the top three 'newest' artists.
+SELECT name FROM "Artists_Info"
+    ORDER BY startup_year desc
+    LIMIT 3;
+
+--Display a list of artists, and who they have done collaborations with.
+SELECT a.name, b.name
+    FROM Collaboration
+    JOIN Artists_Info AS a
+    ON collaboration.artist_1 = a.id
+    JOIN Artists_Info AS b
+    ON collaboration.artist_2 = b.id;
+    
+--Display the R&B/Soul artist with the most songs.
+SELECT name, songs 
+    FROM Artists_Info
+    WHERE genre = "R&B/Soul"
+    ORDER BY songs desc
+    LIMIT 1;
+    
+--Display the average amount of songs an R&B/Soul artist has.
+Select ROUND(AVG(songs)) AS "AVG R&B/SOUL SONGS" FROM Artists_Info;
+
